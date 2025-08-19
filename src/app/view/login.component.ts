@@ -6,6 +6,7 @@ import { AuthService } from '../services/authService';
   templateUrl: './login.component.html',
 })
 export class LoginComponent {
+  id: string = '';
   constructor(private auth: AuthService, private router: Router) {}
 
   signInWithGoogle() {
@@ -17,4 +18,9 @@ export class LoginComponent {
       })
       .catch((err) => console.error('Login error:', err));
   }
+
+  // getId(id: string) {
+  //   this.id = id;
+  //   this.router.navigateByUrl(['/group', id]);
+  // }
 }

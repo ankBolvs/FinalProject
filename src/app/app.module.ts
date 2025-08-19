@@ -1,3 +1,4 @@
+import { RestDataSource } from './model/restDatasource';
 import { GroupDetailComponent } from './view/groupDetails.component';
 import { ShowGroupsComponent } from './view/showGroups.component';
 import { NgModule } from '@angular/core';
@@ -9,10 +10,13 @@ import { LoginComponent } from './view/login.component';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from './environment/environment';
 import { AngularFireModule } from '@angular/fire/compat';
-
+import { GroupRepositroy } from './model/group.repository';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [AppComponent, LoginComponent],
   imports: [
+    HttpClientModule,
     BrowserModule,
     ViewModule,
     AngularFireAuthModule,
@@ -28,7 +32,7 @@ import { AngularFireModule } from '@angular/fire/compat';
         component: GroupDetailComponent,
       },
       {
-        path: 'group',
+        path: 'group/:id/:name',
         component: ShowGroupsComponent,
       },
       {
@@ -37,7 +41,7 @@ import { AngularFireModule } from '@angular/fire/compat';
       },
     ]),
   ],
-  providers: [],
+  providers: [HttpClient],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

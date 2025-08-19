@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { User } from './user.model';
 
 const PROTOCOL = 'http';
 const PORT = 3500;
@@ -13,11 +14,11 @@ export class RestDataSource {
     this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
   }
 
-  getUsers(): Observable<any[]> {
+  getUsers(): Observable<User[]> {
     return this.http.get<any[]>(this.baseUrl + 'user');
   }
 
-  getUser(id: number): Observable<any> {
+  getUser(id: string): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}user/${id}`);
   }
 
@@ -37,7 +38,7 @@ export class RestDataSource {
     return this.http.get<any[]>(this.baseUrl + 'groups');
   }
 
-  getGroup(id: number): Observable<any> {
+  getGroupById(id: number): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}groups/${id}`);
   }
 
@@ -78,5 +79,17 @@ export class RestDataSource {
 
   deleteExpense(id: number): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}expenses/${id}`);
+  }
+
+  getGroupsByUserId(userId: string): Observable<string[]> {
+    // return this.http
+    //   .get<any>(`${this.baseUrl}user/${userId}`)
+    //   .pipe(map((user) => user.userGroups ?? []));
+    return this.http.get<any[]>(`${this.baseUrl}user`).pipe(
+      map((users) => {
+        const user = users.find((u) => u.user_id === userId);
+        return user?.userGroups ?? [];
+      })
+    );
   }
 }
