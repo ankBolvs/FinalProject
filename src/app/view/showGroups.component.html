@@ -43,13 +43,11 @@
       </section>
       <section class="groups">
         <div class="card" *ngFor="let group of groups">
-          <div class="card-header">{{ group.group_id }}</div>
+          <div class="card-header">{{ group.category }}</div>
           <div class="card-body">
             <h5 class="card-title">{{ group.group_name }}</h5>
             <p class="card-text">
-              {{ group.expenses }}<br />{{ group.members }}<br />{{
-                group.created_by
-              }}
+              {{ group.description }}
             </p>
             <a href="#" class="btn btn-warning">Details</a>
           </div>

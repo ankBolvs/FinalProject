@@ -36,6 +36,8 @@ module.exports = function () {
       {
         group_id: "101",
         group_name: "Goa Trip",
+        description: "mazze aarahe hai",
+        category: "Travel",
         created_by: "1",
         members: ["1", "2", "3", "4", "5"],
         expenses: ["501", "502", "503"],
@@ -43,6 +45,8 @@ module.exports = function () {
       {
         group_id: "102",
         group_name: "Office Party",
+        description: "mazze aarahe hai",
+        category: "Party",
         created_by: "4",
         members: ["1", "4", "5"],
         expenses: ["504", "505"],
@@ -50,6 +54,8 @@ module.exports = function () {
       {
         group_id: "103",
         group_name: "Birthday Bash",
+        description: "mazze aarahe hai",
+        category: "Party",
         created_by: "5",
         members: ["2", "3", "5"],
         expenses: ["506"],
@@ -57,6 +63,8 @@ module.exports = function () {
       {
         group_id: "104",
         group_name: "Weekend Getaway",
+        description: "mazze aarahe hai",
+        category: "Travel",
         created_by: "2",
         members: ["2", "3", "4"],
         expenses: ["507", "508", "509"],
@@ -64,6 +72,8 @@ module.exports = function () {
       {
         group_id: "105",
         group_name: "Flatmates",
+        description: "mazze aarahe hai",
+        category: "Grocery",
         created_by: "3",
         members: ["1", "3", "5"],
         expenses: ["510", "511"],

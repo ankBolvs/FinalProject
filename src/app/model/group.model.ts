@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 export class Group {
   public group_id?: string;
   public group_name?: string;
+  public description?: string;
+  public category?: string;
   public created_by?: string;
   public members?: Array<string>;
   public expenses?: Array<string>;
