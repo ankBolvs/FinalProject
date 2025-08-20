@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { User } from './user.model';
+import { Group } from './group.model';
 
 const PROTOCOL = 'http';
 const PORT = 3500;
@@ -42,7 +43,7 @@ export class RestDataSource {
     return this.http.get<any>(`${this.baseUrl}groups/${id}`);
   }
 
-  addGroup(group: any): Observable<any> {
+  addGroup(group: Group): Observable<any> {
     return this.http.post<any>(this.baseUrl + 'groups', group);
   }
 

@@ -13,6 +13,9 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { GroupRepositroy } from './model/group.repository';
 import { HttpClient } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
+import { AddExpenseComponent } from './view/addExpense.component';
+import { AddUserComponent } from './view/addUser.component';
+import { CreateGroupComponent } from './view/createGroups.component';
 @NgModule({
   declarations: [AppComponent, LoginComponent],
   imports: [
@@ -28,12 +31,28 @@ import { HttpClientModule } from '@angular/common/http';
         component: LoginComponent,
       },
       {
-        path: 'details',
+        path: 'create-group',
+        component: CreateGroupComponent,
+      },
+      {
+        path: 'group-details',
+        component: GroupDetailComponent,
+      },
+      {
+        path: 'group-details/:id',
         component: GroupDetailComponent,
       },
       {
         path: 'group/:id/:name',
         component: ShowGroupsComponent,
+      },
+      {
+        path: 'addExpense',
+        component: AddExpenseComponent,
+      },
+      {
+        path: 'addUsers',
+        component: AddUserComponent,
       },
       {
         path: '**',

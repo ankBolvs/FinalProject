@@ -1,0 +1,22 @@
+<div class="container">
+  <h2>Search Members by Email</h2>
+
+  <input
+    type="text"
+    [(ngModel)]="searchEmail"
+    (ngModelChange)="filterMembers()"
+    placeholder="Enter email to search..."
+  />
+
+  <!-- No Results Message -->
+  <div *ngIf="filteredMembers.length === 0">
+    No members found with that email.
+  </div>
+
+  <!-- Member List -->
+  <ul class="list-group">
+    <li *ngFor="let member of filteredMembers" class="list-group-item">
+      <strong>{{ member.name }}</strong> - {{ member.email }}
+    </li>
+  </ul>
+</div>

@@ -39,30 +39,40 @@
     </header>
     <main>
       <section>
+        <h3>Group Name:{{ groupDetail?.group_name }}</h3>
+        <span></span>
+        <div>Category:{{ groupDetail?.category }}</div>
+        <div>Description:{{ groupDetail?.description }}</div>
         <div class="card member-card">
+          <div>{{ getGroupUsersData.length }}</div>
           <div class="card-header">Member Summary</div>
-          <ul class="list-group list-group-flush">
+          <ul
+            class="list-group list-group-flush"
+            *ngFor="let item of groupMembersData"
+          >
             <li class="list-group-item d-flex justify-content-between">
-              <span>Mark</span>
+              <span>{{ item.name }}</span>
               <span class="amount positive">+500</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Jacob</span>
-              <span class="amount negative">-200</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-              <span>Larry the Bird</span>
-              <span class="amount positive">+150</span>
             </li>
           </ul>
         </div>
         <div class="button">
-          <button type="button" class="btn btn-outline-warning">
-            Add Expence<span class="material-symbols-outlined">
+          <button
+            type="button"
+            class="btn btn-outline-warning"
+            [routerLink]="['/addExpense']"
+          >
+            Add Expense<span class="material-symbols-outlined">
               arrow_forward
             </span>
           </button>
-          <button type="button" class="btn btn-dark">Add Members</button>
+          <button
+            type="button"
+            class="btn btn-dark"
+            [routerLink]="['/addUsers']"
+          >
+            Add Members
+          </button>
         </div>
       </section>
     </main>
