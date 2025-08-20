@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GroupRepositroy } from '../model/group.repository';
 import { User } from '../model/user.model';
 import { Group } from '../model/group.model';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'show-Group',
@@ -11,7 +12,7 @@ import { Group } from '../model/group.model';
   styleUrl: 'showGroups.component.css',
 })
 export class ShowGroupsComponent {
-  userName?: string;
+  userName?: string | null;
   id: string;
   user?: User;
   //groups?: string[];
@@ -19,10 +20,11 @@ export class ShowGroupsComponent {
     private authService: AuthService,
     private router: Router,
     private activeRoute: ActivatedRoute,
-    private groupRepo: GroupRepositroy
+    private groupRepo: GroupRepositroy,
+    private userDetails: UserService
   ) {
-    this.id = activeRoute.snapshot.params['id'];
-    this.userName = activeRoute.snapshot.params['name'];
+    this.id = userDetails.getUserId();
+    this.userName = userDetails.getUserName();
 
     // console.log('from constructor' + this.id);
     // this.groupRepo.getUserGroups(this.id);

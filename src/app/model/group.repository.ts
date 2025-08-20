@@ -52,11 +52,14 @@ export class GroupRepositroy {
     const lastId = lastGroup ? parseInt(lastGroup.group_id || '100', 10) : 100;
 
     group.group_id = (lastId + 1).toString();
+    group.id = group.group_id;
+    // console.log('id sent=' + group.id);
 
     this.res.addGroup(group).subscribe((newGroup) => {
       this.groupsData.push(newGroup); // Maintain ascending order
       console.log('Updated groupsData:', this.groupsData); // ✅ Log here
     });
+    return group.id;
   }
   getGroupUsersData(groupid: string) {
     let group = this.getGroup(groupid);

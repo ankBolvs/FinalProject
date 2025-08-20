@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable } from 'rxjs';
+import { map, Observable, switchAll } from 'rxjs';
 import { User } from './user.model';
 import { Group } from './group.model';
 
@@ -19,8 +19,14 @@ export class RestDataSource {
     return this.http.get<any[]>(this.baseUrl + 'user');
   }
 
-  getUser(id: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}user/${id}`);
+  // getUser(id: string): Observable<any> {
+  //   return this.http.get<any>(`${this.baseUrl}user/${id}`);
+  // }
+  // getUser(id: string): Observable<User> {
+  //   return this.http.get<any>(`${this.baseUrl}user?user_id=${id}`);
+  // }
+  getUser(id: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}user?user_id=${id}`);
   }
 
   addUser(user: any): Observable<any> {
@@ -92,5 +98,58 @@ export class RestDataSource {
         return user?.userGroups ?? [];
       })
     );
+  }
+  // updateUserByQuery(user: User): Observable<any> {
+  //   return this.http
+  //     .get<User[]>(`${this.baseUrl}user?user_id=${user.user_id}`)
+  //     .pipe(
+  //       map((users) => {
+  //         if (!users || users.length === 0) {
+  //           throw new Error('User not found');
+  //         }
+  //         const existingUser = users[0];
+  //         const internalId = existingUser.user_id || existingUser.user_id; // Adjust based on your backend
+  //         return this.http.put(`${this.baseUrl}user/${internalId}`, user);
+  //       }),
+  //       switchAll() // Flattens the nested Observable
+  //     );
+  // }
+  // updateUserByUserId(user: User): Observable<any> {
+  //   return this.http
+  //     .get<User[]>(`${this.baseUrl}user?user_id=${user.user_id}`)
+  //     .pipe(
+  //       map((users) => {
+  //         if (!users || users.length === 0) {
+  //           throw new Error('User not found');
+  //         }
+
+  //         const existingUser = users[0];
+  //         const internalId = existingUser.id || existingUser.user_id;
+
+  //         return this.http.put(`${this.baseUrl}user/${internalId}`, user);
+  //       }),
+  //       switchAll()
+  //     );
+  // }
+  updateUserByUserId(user: User): Observable<any> {
+    return this.http
+      .get<User[]>(`${this.baseUrl}user?user_id=${user.user_id}`)
+      .pipe(
+        map((users) => {
+          if (!users || users.length === 0) {
+            throw new Error('User not found');
+          }
+
+          const existingUser = users[0];
+          const internalId = existingUser.id;
+
+          if (!internalId) {
+            throw new Error('User is missing internal id');
+          }
+
+          return this.http.put(`${this.baseUrl}user/${internalId}`, user);
+        }),
+        switchAll()
+      );
   }
 }

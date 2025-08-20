@@ -2,30 +2,35 @@ module.exports = function () {
   return {
     user: [
       {
+        id: "1",
         user_id: "1",
         name: "Harshita",
         email: "harshita@example.com",
         userGroups: ["101", "102", "105"],
       },
       {
+        id: "2",
         user_id: "2",
         name: "Rohan",
         email: "rohan@example.com",
         userGroups: ["101", "103", "104"],
       },
       {
+        id: "3",
         user_id: "3",
         name: "Sneha",
         email: "sneha@example.com",
         userGroups: ["101", "103", "104", "105"],
       },
       {
+        id: "4",
         user_id: "4",
         name: "Arjun",
         email: "arjun@example.com",
         userGroups: ["101", "102", "104"],
       },
       {
+        id: "5",
         user_id: "5",
         name: "Priya",
         email: "priya@example.com",

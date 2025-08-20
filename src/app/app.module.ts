@@ -47,6 +47,10 @@ import { CreateGroupComponent } from './view/createGroups.component';
         component: ShowGroupsComponent,
       },
       {
+        path: 'show-groups',
+        component: ShowGroupsComponent,
+      },
+      {
         path: 'addExpense',
         component: AddExpenseComponent,
       },

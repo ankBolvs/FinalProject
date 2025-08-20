@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 
-@Injectable()
-export class Group {
-  public group_id?: string;
-  public group_name?: string;
-  public description?: string;
-  public category?: string;
-  public created_by?: string;
-  public members?: Array<string>;
-  public expenses?: Array<string>;
+export interface Group {
+  id?: string;
+  group_id?: string;
+  group_name?: string;
+  description?: string;
+  category?: string;
+  created_by?: string;
+  members?: Array<string>;
+  expenses?: Array<string>;
 }
