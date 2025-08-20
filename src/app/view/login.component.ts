@@ -31,9 +31,4 @@ export class LoginComponent {
     );
     this.router.navigateByUrl('/show-groups');
   }
-
-  // getId(id: string) {
-  //   this.id = id;
-  //   this.router.navigateByUrl(['/group', id]);
-  // }
 }

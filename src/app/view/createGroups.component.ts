@@ -63,33 +63,6 @@ export class CreateGroupComponent {
     });
   }
 
-  // submitGroup() {
-  //   this.submittedForm = true;
-
-  //   if (this.createGroup.valid) {
-  //     // console.log(this.createGroup.value);
-  //     // this.createGroup.value;
-  //     const formValues = this.createGroup.value;
-  //     //console.log('groupname is ' + formValues.group_name);
-  //     const newGroup: Group = {
-  //       group_name: formValues.group_name,
-  //       description: formValues.description,
-  //       category: formValues.category,
-  //       created_by: this.userDetails.getUserId(), // Replace with actual user ID logic
-  //       members: [this.userDetails.getUserId()],
-  //       expenses: [],
-  //     };
-
-  //     this.groupRepo.addGroup(newGroup);
-  //     // console.log('user id:' + this.userDetails.getUserId());
-  //     this.user = this.userRepo.getUser(this.userDetails.getUserId());
-  //     console.log(this.user.name);
-  //     // console.log(
-  //     //   'user fetched by id ' + this.userDetails.getUserId() + this.user
-  //     // );
-  //     //this.router.navigateByUrl('/show-groups');
-  //   }
-  // }
   submitGroup() {
     this.submittedForm = true;
 
@@ -106,47 +79,43 @@ export class CreateGroupComponent {
         expenses: [],
       };
 
-      this.newGroupId = this.groupRepo.addGroup(newGroup);
+      // this.newGroupId = this.groupRepo.addGroup(newGroup);
+
       // this.userRepo.getUser(userId).subscribe({
       //   next: (user) => {
-      //     this.user = user;
-      //     this.user.userGroups?.push(this.newGroupId);
+      //     user.userGroups.push(this.newGroupId); // Modify locally
 
-      //     console.log('User groups:', this.user.userGroups); // ✅ Now this works
-      //     this.userRepo.updateUser(this.user).subscribe({
+      //     this.userRepo.updateUser(user).subscribe({
       //       next: () => {
       //         console.log('User updated successfully');
-      //         // Optionally redirect or show success message
+      //         this.router.navigateByUrl('/show-groups');
       //       },
       //       error: (err) => {
       //         console.error('Failed to update user:', err);
       //       },
       //     });
-
-      //     // this.router.navigateByUrl('/show-groups');
       //   },
       //   error: (err) => {
-      //     console.error('Error fetching user:', err);
+      //     console.error('Failed to fetch user:', err);
       //   },
       // });
-      this.userRepo.getUser(userId).subscribe({
-        next: (user) => {
-          user.userGroups.push(this.newGroupId); // Modify locally
-
-          this.userRepo.updateUser(user).subscribe({
-            next: () => {
-              console.log('User updated successfully');
-              this.router.navigateByUrl('/show-groups');
-            },
-            error: (err) => {
-              console.error('Failed to update user:', err);
-            },
-          });
-        },
-        error: (err) => {
-          console.error('Failed to fetch user:', err);
-        },
+      this.groupRepo.addGroup(newGroup).subscribe((createdGroup) => {
+        this.newGroupId = createdGroup.group_id!;
+        this.userRepo.getUser(userId).subscribe({
+          next: (user) => {
+            user.userGroups.push(this.newGroupId);
+            this.userRepo.updateUser(user).subscribe({
+              next: () => {
+                console.log('User updated successfully');
+              },
+              error: (err) => console.error('Failed to update user:', err),
+            });
+          },
+          error: (err) => console.error('Failed to fetch user:', err),
+        });
       });
     }
+
+    this.router.navigateByUrl('/show-groups');
   }
 }
